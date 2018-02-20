@@ -4,4 +4,7 @@
     <string name="title_activity_hue">HueActivity</string>
     <string name="title_activity_sat">SatActivity</string>
     <string name="title_activity_val">ValActivity</string>
+    <string name="Hue">Hue</string>
+    <string name="Saturation">Saturation</string>
+    <string name="Value">Value</string>
 </resources>
