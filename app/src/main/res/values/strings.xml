@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ColorExplorer</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_hue">HueActivity</string>
+    <string name="title_activity_sat">SatActivity</string>
+    <string name="title_activity_val">ValActivity</string>
 </resources>

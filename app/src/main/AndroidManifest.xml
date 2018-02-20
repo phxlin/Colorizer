@@ -19,6 +19,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HueActivity"
+            android:label="@string/title_activity_hue"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.yufanlin.colorexplorer.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SatActivity"
+            android:label="@string/title_activity_sat"
+            android:parentActivityName=".HueActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.yufanlin.colorexplorer.HueActivity" />
+        </activity>
+        <activity
+            android:name=".ValActivity"
+            android:label="@string/title_activity_val"
+            android:parentActivityName=".SatActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.yufanlin.colorexplorer.SatActivity" />
+        </activity>
     </application>
 
 </manifest>
