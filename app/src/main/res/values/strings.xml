@@ -7,4 +7,5 @@
     <string name="Hue">Hue</string>
     <string name="Saturation">Saturation</string>
     <string name="Value">Value</string>
+    <string name="color">color</string>
 </resources>
