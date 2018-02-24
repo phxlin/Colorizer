@@ -1,16 +1,16 @@
 package me.yufanlin.colorexplorer.model;
 
-public class Color {
+public class ColorHSV {
 
     private float hue;
     private float saturation;
     private float value;
 
     //Constructors
-    public Color() {
+    public ColorHSV() {
     }
 
-    public Color(float hue, float saturation, float value) {
+    public ColorHSV(float hue, float saturation, float value) {
         this.hue = hue;
         this.saturation = saturation;
         this.value = value;

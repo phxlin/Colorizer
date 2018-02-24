@@ -7,13 +7,34 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import me.yufanlin.colorexplorer.model.ColorHSV;
 
 public class HueActivity extends AppCompatActivity {
+
+    List<ColorHSV> colorList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hue);
+
+        int mCentralHue = 120;
+        int mSwatchNum = 50;
+
+        for (int i = 0; i < mSwatchNum; i++){
+            colorList.add( new ColorHSV(mCentralHue, (float) 1.0, (float) 1.0));
+        }
+
+        ColorAdapter adapter = new ColorAdapter(this, colorList, 0, mSwatchNum);
+
+        ListView listView = findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
