@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
@@ -23,17 +24,20 @@ public class HueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hue);
 
+        //Default values
         int mCentralHue = 120;
         int mSwatchNum = 50;
 
+        //Make the color list
         for (int i = 0; i < mSwatchNum; i++){
             colorList.add( new ColorHSV(mCentralHue, (float) 1.0, (float) 1.0));
         }
 
+        //Declaration and instantiation
         ColorAdapter adapter = new ColorAdapter(this, colorList, 0, mSwatchNum);
 
-        ListView listView = findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = findViewById(R.id.rvColors);
+        recyclerView.setAdapter(adapter);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
