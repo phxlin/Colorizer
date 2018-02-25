@@ -1,6 +1,9 @@
 package me.yufanlin.colorexplorer.model;
 
-public class ColorHSV {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ColorHSV implements Parcelable {
 
     private float hue;
     private float saturation;
@@ -50,4 +53,34 @@ public class ColorHSV {
                 ", value=" + value +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeFloat(this.hue);
+        dest.writeFloat(this.saturation);
+        dest.writeFloat(this.value);
+    }
+
+    protected ColorHSV(Parcel in) {
+        this.hue = in.readFloat();
+        this.saturation = in.readFloat();
+        this.value = in.readFloat();
+    }
+
+    public static final Parcelable.Creator<ColorHSV> CREATOR = new Parcelable.Creator<ColorHSV>() {
+        @Override
+        public ColorHSV createFromParcel(Parcel source) {
+            return new ColorHSV(source);
+        }
+
+        @Override
+        public ColorHSV[] newArray(int size) {
+            return new ColorHSV[size];
+        }
+    };
 }

@@ -1,5 +1,6 @@
 package me.yufanlin.colorexplorer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import me.yufanlin.colorexplorer.model.ColorHSV;
 public class HueActivity extends AppCompatActivity {
 
     List<ColorHSV> colorList = new ArrayList<>();
+    private static final int ACTIVITY_ID_KEY = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +28,20 @@ public class HueActivity extends AppCompatActivity {
 
         //Default values
         int mCentralHue = 120;
-        int mSwatchNum = 50;
+        int mSwatchNum = 6;
 
         //Make the color list
         for (int i = 0; i < mSwatchNum; i++){
             colorList.add( new ColorHSV(mCentralHue, (float) 1.0, (float) 1.0));
         }
 
-        //Declaration and instantiation
-        ColorAdapter adapter = new ColorAdapter(this, colorList, 0, mSwatchNum);
+        //Adapter and recycler view
+        ColorAdapter adapter = new ColorAdapter(this, colorList, 0, mSwatchNum, ACTIVITY_ID_KEY);
 
         RecyclerView recyclerView = findViewById(R.id.rvColors);
         recyclerView.setAdapter(adapter);
 
+        //Toolbar and actionbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,11 +54,5 @@ public class HueActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    public void displaySat(View view) {
-        //Navigate to and launch Saturation Activity
-        Intent intent = new Intent(this, SatActivity.class);
-        startActivity(intent);
     }
 }
