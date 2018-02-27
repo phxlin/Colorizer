@@ -4,8 +4,20 @@
     <string name="title_activity_hue">Hue</string>
     <string name="title_activity_sat">Saturation</string>
     <string name="title_activity_val">Value</string>
-    <string name="Hue">Hue</string>
-    <string name="Saturation">Saturation</string>
-    <string name="Value">Value</string>
+    <string name="title_activity_selected">Selected Color</string>
+    <string name="Start">Start</string>
     <string name="color">color</string>
+
+    <string name="hue_view">HueView</string>
+    <string name="sat_view">SatView</string>
+    <string name="val_view">ValView</string>
+    <string name="central_hue">Central Hue: </string>
+    <string name="swatch_number">Swatch Number: </string>
+
+    <string name="edit_central_hue">Edit central hue</string>
+    <string name="edit_swat">Edit swatch number</string>
+
+    <string name="central_hue_edit_text_preference">Central Hue Edit Text Preference</string>
+    <string name="swat_edit_text_preference">Swatch Number Edit Text Preference</string>
+
 </resources>

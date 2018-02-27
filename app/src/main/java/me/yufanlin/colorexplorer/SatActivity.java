@@ -1,13 +1,19 @@
 package me.yufanlin.colorexplorer;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +21,8 @@ import me.yufanlin.colorexplorer.model.ColorHSV;
 
 public class SatActivity extends AppCompatActivity {
 
-    List<ColorHSV> colorList = new ArrayList<>();
-    private static final int ACTIVITY_ID_KEY = 1002;
+    private List<ColorHSV> colorList = new ArrayList<>();
+    private static final int ACTIVITY_KEY = 1002;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +30,22 @@ public class SatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sat);
 
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //Default value
-        float mSelectedHue = prefs.getFloat(ColorAdapter.HUE_ID_KEY, 120);
-        int mSwatchNum = 10;
+        //Retrieve color
+        float mCentralHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
+        float mSaturation = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
+        float mValue = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
+        int mSwatchNum = Integer.parseInt(settings.getString(getString(R.string.swat_edit_text_preference), "13"));
+        displayToast(mCentralHue, mSaturation, mValue, mSwatchNum);
 
-        //Make the color list
+        //Make color list
         for (int i = 0; i < mSwatchNum; i++){
-            colorList.add( new ColorHSV(mSelectedHue, (float) 1.0, (float) 1.0));
+            colorList.add( new ColorHSV(mCentralHue, mSaturation, mValue));
         }
 
         //Adapter and recycler view
-        ColorAdapter adapter = new ColorAdapter(this, colorList, 1, mSwatchNum, ACTIVITY_ID_KEY);
+        ColorAdapter adapter = new ColorAdapter(this, colorList, 1, mSwatchNum, ACTIVITY_KEY);
 
         RecyclerView recyclerView = findViewById(R.id.rvColors);
         recyclerView.setAdapter(adapter);
@@ -48,10 +58,46 @@ public class SatActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(view.getContext(), ValActivity.class);
+                startActivity(intent);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    //Settings menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, PrefsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void displayToast(float hue, float sat, float val, int swatch) {
+        if(hue > 360) {
+            hue -= 360;
+        }
+
+        if(hue < 0) {
+            hue += 360;
+        }
+
+        //neatly format the chosen saturation and value
+        String mFormatSat = String.format("%.2f", sat * 100);
+        String mFormatVal = String.format("%.2f", val*100);
+
+        Toast.makeText(this, "Hue: " + hue + "\u00B0"
+                + ", Sat: " + mFormatSat + "%"
+                + ", Val: " + mFormatVal + "%"
+                + ", Swat: " + swatch, Toast.LENGTH_LONG).show();
     }
 }
