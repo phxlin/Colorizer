@@ -19,5 +19,9 @@
 
     <string name="central_hue_edit_text_preference">Central Hue Edit Text Preference</string>
     <string name="swat_edit_text_preference">Swatch Number Edit Text Preference</string>
+    <string name="central_hue_text_view">Central Hue</string>
+    <string name="swatch_number_text_view">Swatch Number</string>
+    <string name="central_hue_progress">Progress</string>
+    <string name="swatch_number_progress">Progress</string>
 
 </resources>

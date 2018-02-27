@@ -1,5 +1,6 @@
 package me.yufanlin.colorexplorer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,16 +37,18 @@ public class ValActivity extends AppCompatActivity {
         float mCentralHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
         float mSaturation = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
         float mValue = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
-        int mSwatchNum = Integer.parseInt(settings.getString(getString(R.string.swat_edit_text_preference), "13"));
-        displayToast(mCentralHue, mSaturation, mValue, mSwatchNum);
+        int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
 
         //Make color list
         for (int i = 0; i < mSwatchNum; i++){
             colorList.add( new ColorHSV(mCentralHue, mSaturation, mValue));
         }
 
+        //Display toast
+        displayToast(mCentralHue, mSaturation, mValue, mSwatchNum);
+
         //Adapter and recycler view
-        ColorAdapter adapter = new ColorAdapter(this, colorList, 2, mSwatchNum, ACTIVITY_ID_KEY);
+        ColorAdapter adapter = new ColorAdapter(this, colorList, 2, ACTIVITY_ID_KEY);
 
         RecyclerView recyclerView = findViewById(R.id.rvColors);
         recyclerView.setAdapter(adapter);
@@ -93,8 +96,8 @@ public class ValActivity extends AppCompatActivity {
         }
 
         //neatly format the chosen saturation and value
-        String mFormatSat = String.format("%.2f", sat * 100);
-        String mFormatVal = String.format("%.2f", val*100);
+        @SuppressLint("DefaultLocale") String mFormatSat = String.format("%.2f", sat * 100);
+        @SuppressLint("DefaultLocale") String mFormatVal = String.format("%.2f", val*100);
 
         Toast.makeText(this, "Hue: " + hue + "\u00B0"
                 + ", Sat: " + mFormatSat + "%"

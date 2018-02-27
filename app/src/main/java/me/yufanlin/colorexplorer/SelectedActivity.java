@@ -1,5 +1,6 @@
 package me.yufanlin.colorexplorer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,6 +56,10 @@ public class SelectedActivity extends AppCompatActivity {
     private void displayColor(float hue, float sat, float val, int numb) {
         float leftHue = (hue - ((360/numb)/2));
         float rightHue = (hue + ((360/numb)/2));
+        String huePlaceHolder;
+        String satPlaceHolder;
+        String valPlaceHolder;
+
         if(leftHue < 0){
             leftHue += 360;
         }
@@ -68,19 +73,24 @@ public class SelectedActivity extends AppCompatActivity {
             rightHue -= 360;
         }
         if(leftHue > rightHue){
-            mHueView.setText("The chosen hues range from " + (int) leftHue + "\u00B0 to " + (int) rightHue +
-                    "\u00B0 (" + (int) (rightHue + 360) + "\u00B0)");
+            huePlaceHolder = "The chosen hues range from " + (int) leftHue + "\u00B0 to " + (int) rightHue +
+                    "\u00B0 (" + (int) (rightHue + 360) + "\u00B0)";
+            mHueView.setText(huePlaceHolder);
         }
         else{
-            mHueView.setText("The chosen hues range from " + (int) leftHue + "\u00B0 to " + (int) rightHue
-                    + "\u00B0");
+            huePlaceHolder = "The chosen hues range from " + (int) leftHue + "\u00B0 to " + (int) rightHue
+                    + "\u00B0";
+            mHueView.setText(huePlaceHolder);
         }
 
         //Neatly format the chosen saturation and value
-        String mFormatSat = String.format("%.2f", sat * 100);
-        String mFormatVal = String.format("%.2f", val*100);
+        @SuppressLint("DefaultLocale") String mFormatSat = String.format("%.2f", sat * 100);
+        @SuppressLint("DefaultLocale") String mFormatVal = String.format("%.2f", val*100);
 
-        mSatView.setText("The chosen saturation is " + mFormatSat + "%.");
-        mValView.setText("The chosen value is " + mFormatVal + "%.");
+        satPlaceHolder = "The chosen saturation is " + mFormatSat + "%.";
+        valPlaceHolder = "The chosen value is " + mFormatVal + "%.";
+
+        mSatView.setText(satPlaceHolder);
+        mValView.setText(valPlaceHolder);
     }
 }

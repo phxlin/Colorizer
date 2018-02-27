@@ -26,16 +26,19 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     private List<ColorHSV> mColorList;
     private Context mContext;
     private int mSelector;
-    private int mSwatchNum;
     private int mActivityId;
+    private int mSwatchNum;
+    private float mHue;
+    private float mSat;
+    private float mVal;
 
     //Constructor
-    ColorAdapter(Context context, List<ColorHSV> colors, int selector, int swatchNumber, int activityId) {
+    ColorAdapter(Context context, List<ColorHSV> colors, int selector, int activityId) {
         this.mContext = context;
         this.mColorList = colors;
         this.mSelector = selector;
-        this.mSwatchNum = swatchNumber;
         this.mActivityId = activityId;
+        this.mSwatchNum = getItemCount();
     }
 
     //Called automatically by the adapter each time it needs a new visual representation of a color.
@@ -55,9 +58,9 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
 
         //Display color
         ColorHSV mColor = mColorList.get(position);
-        final float mHue = mColor.getHue();
-        final float mSat = mColor.getSaturation();
-        final float mVal = mColor.getValue();
+        mHue = mColor.getHue();
+        mSat = mColor.getSaturation();
+        mVal = mColor.getValue();
 
         int mColorLeft = getLeftColor(mHue, mSwatchNum, position, mSat, mVal, mSelector);
         int mColorRight = getRightColor(mHue, mSwatchNum, position, mSat, mVal, mSelector);
@@ -83,7 +86,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
                         setFloat(HUE_KEY, mSelectedHue);
                         setFloat(SAT_KEY, mSat);
                         setFloat(VAL_KEY, mVal);
-                        setInt(SWATCH_NUMBER_KEY, getItemCount());
+                        setInt(SWATCH_NUMBER_KEY, mSwatchNum);
                         mContext.startActivity(intent);
                         break;
                     }
@@ -92,7 +95,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
                         setFloat(HUE_KEY, mHue);
                         setFloat(SAT_KEY, mSelectedSat);
                         setFloat(VAL_KEY, mVal);
-                        setInt(SWATCH_NUMBER_KEY, getItemCount());
+                        setInt(SWATCH_NUMBER_KEY, mSwatchNum);
                         mContext.startActivity(intent);
                         break;
                     }
@@ -101,13 +104,14 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
                         setFloat(HUE_KEY, mHue);
                         setFloat(SAT_KEY, mSat);
                         setFloat(VAL_KEY, mSelectedVal);
-                        setInt(SWATCH_NUMBER_KEY, getItemCount());
+                        setInt(SWATCH_NUMBER_KEY, mSwatchNum);
                         mContext.startActivity(intent);
                         break;
                     }
                 }
             }
         });
+
     }
 
     //Return number of colors in the color collection.
@@ -162,7 +166,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
             mColorHSV = Color.HSVToColor(hsv);
         }
         else if(selector == 1){
-            float mHueCentral = (hue - ((360/mSwatchNum)/2));
+            float mHueCentral = (hue - ((360/swatchCount)/2));
             if(mHueCentral < 0){
                 mHueCentral += 360;
             }
@@ -173,7 +177,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
             mColorHSV = Color.HSVToColor(hsv);
         }
         else if(selector == 2){
-            float mHueCentral = (hue - ((360/mSwatchNum)/2));
+            float mHueCentral = (hue - ((360/swatchCount)/2));
             if(mHueCentral < 0){
                 mHueCentral += 360;
             }
@@ -204,7 +208,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
             mColorHSV = Color.HSVToColor(hsv);
         }
         else if(selector == 1){
-            float mHueCentral = (hue + ((360/mSwatchNum)/2));
+            float mHueCentral = (hue + ((360/swatchCount)/2));
             if(mHueCentral < 0){
                 mHueCentral += 360;
             }
@@ -215,7 +219,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
             mColorHSV = Color.HSVToColor(hsv);
         }
         else if(selector == 2){
-            float mHueCentral = (hue + ((360/mSwatchNum)/2));
+            float mHueCentral = (hue + ((360/swatchCount)/2));
             if(mHueCentral < 0){
                 mHueCentral += 360;
             }

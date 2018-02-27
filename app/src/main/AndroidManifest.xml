@@ -51,6 +51,7 @@
         </activity>
         <activity
             android:name=".PrefsActivity"
+            android:label="Settings"
             android:parentActivityName=".HueActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
