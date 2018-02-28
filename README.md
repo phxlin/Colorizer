@@ -4,7 +4,7 @@ Hopin is a color generator application for Android.
 
 ## User Stories
 
-The following **required** functionality is completed:
+The following functionality is completed:
 * [X] User can select hue, saturation, and value
 * [X] Show selected color and info
 * [X] Save preference (Central hue and swatch number)
