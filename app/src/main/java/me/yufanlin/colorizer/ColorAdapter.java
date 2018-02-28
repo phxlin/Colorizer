@@ -1,20 +1,18 @@
-package me.yufanlin.colorexplorer;
+package me.yufanlin.colorizer;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.List;
 
-import me.yufanlin.colorexplorer.model.ColorHSV;
+import me.yufanlin.colorizer.model.ColorHSV;
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
 

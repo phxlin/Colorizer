@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="me.yufanlin.colorexplorer.SelectedActivity"
+    tools:context="me.yufanlin.colorizer.SelectedActivity"
     tools:showIn="@layout/activity_selected">
 
     <TextView

@@ -1,4 +1,4 @@
-package me.yufanlin.colorexplorer;
+package me.yufanlin.colorizer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">ColorExplorer</string>
+    <string name="app_name">Colorizer</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_hue">Hue</string>
+    <string name="title_activity_hue">Colorizer</string>
     <string name="title_activity_sat">Saturation</string>
     <string name="title_activity_val">Value</string>
     <string name="title_activity_selected">Selected Color</string>

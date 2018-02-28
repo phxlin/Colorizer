@@ -1,4 +1,4 @@
-package me.yufanlin.colorexplorer;
+package me.yufanlin.colorizer;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.yufanlin.colorexplorer">
+    package="me.yufanlin.colorizer">
 
     <application
         android:allowBackup="true"
@@ -28,7 +28,7 @@
             android:launchMode="standard">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="me.yufanlin.colorexplorer.HueActivity" />
+                android:value=".HueActivity" />
         </activity>
         <activity
             android:name=".ValActivity"
@@ -38,7 +38,7 @@
             android:launchMode="standard">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="me.yufanlin.colorexplorer.SatActivity" />
+                android:value=".SatActivity" />
         </activity>
         <activity
             android:name=".SelectedActivity"
@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="me.yufanlin.colorexplorer.ValActivity" />
+                android:value=".ValActivity" />
         </activity>
         <activity
             android:name=".PrefsActivity"
@@ -55,7 +55,7 @@
             android:parentActivityName=".HueActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="me.yufanlin.colorexplorer.HueActivity" />
+                android:value=".HueActivity" />
         </activity>
     </application>
 

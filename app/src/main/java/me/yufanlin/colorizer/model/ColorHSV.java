@@ -1,4 +1,4 @@
-package me.yufanlin.colorexplorer.model;
+package me.yufanlin.colorizer.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
