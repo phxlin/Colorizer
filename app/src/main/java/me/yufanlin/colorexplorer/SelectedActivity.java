@@ -3,6 +3,8 @@ package me.yufanlin.colorexplorer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +20,7 @@ public class SelectedActivity extends AppCompatActivity {
     TextView mHueView;
     TextView mSatView;
     TextView mValView;
+    TextView mColorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +33,25 @@ public class SelectedActivity extends AppCompatActivity {
         float mSelectedHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
         float mSelectedSat = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
         float mSelectedVal = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
-        int mSwatchNumb = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
+        int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
 
         mHueView = findViewById(R.id.hueView);
         mSatView = findViewById(R.id.satView);
         mValView = findViewById(R.id.valView);
+        mColorView = findViewById(R.id.colorView);
 
-        displayColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNumb);
+        //Display color information
+        displayColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
+
+        //Display color
+        int mLeftColor = getLeftColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
+        int mRightColor = getRightColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
+
+        GradientDrawable drawable
+                = new GradientDrawable( GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[] {mLeftColor, mRightColor} );
+
+        mColorView.setBackground(drawable);
 
         //Toolbar and actionbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,6 +68,35 @@ public class SelectedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private int getLeftColor(float hue, float sat, float val, int swat) {
+        float mHueCentral = (hue - ((360/swat)/2));
+        if(mHueCentral < 0){
+            mHueCentral += 360;
+        }
+        if(mHueCentral > 360){
+            mHueCentral -= 360;
+        }
+
+        float[] hsv = {mHueCentral, sat, val};
+
+        return Color.HSVToColor(hsv);
+    }
+
+    private int getRightColor(float hue, float sat, float val, int swat) {
+        float mHueCentral = (hue + ((360/swat)/2));
+        if(mHueCentral < 0){
+            mHueCentral += 360;
+        }
+        if(mHueCentral > 360){
+            mHueCentral -= 360;
+        }
+
+        float[] hsv = {mHueCentral, sat, val};
+
+        return Color.HSVToColor(hsv);
+    }
+
+    //Display color information
     private void displayColor(float hue, float sat, float val, int numb) {
         float leftHue = (hue - ((360/numb)/2));
         float rightHue = (hue + ((360/numb)/2));
