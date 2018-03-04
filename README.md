@@ -11,7 +11,7 @@ The following functionalities are completed:
 
 ## Picture Demo 
 <img src="https://i.imgur.com/r2ntJ28.png" width="500" title='Hue' alt='Hue' />
-<img src="https://i.imgur.com/d309W0L.png" title='Saturation'alt='Sat' />
-<img src="https://i.imgur.com/uHipDDr.png" title='Value' alt='Val' />
-<img src="https://i.imgur.com/LoIzVEW.png" title='Selected' alt='Sel' />
-<img src="https://i.imgur.com/TaAFcUz.png" title='Preference' alt='Prefs' />
+<img src="https://i.imgur.com/d309W0L.png" width="500" title='Saturation'alt='Sat' />
+<img src="https://i.imgur.com/uHipDDr.png" width="500" title='Value' alt='Val' />
+<img src="https://i.imgur.com/LoIzVEW.png" width="500" title='Selected' alt='Sel' />
+<img src="https://i.imgur.com/TaAFcUz.png" width="500" title='Preference' alt='Prefs' />
