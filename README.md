@@ -10,7 +10,7 @@ The following functionalities are completed:
 * [X] Save preference (Central hue and swatch number)
 
 ## Picture Demo 
-<img src="https://i.imgur.com/r2ntJ28.png" title='Hue' alt='Hue' />
+<img src="https://i.imgur.com/r2ntJ28.png" width="100" title='Hue' alt='Hue' />
 <img src="https://i.imgur.com/d309W0L.png" title='Saturation'alt='Sat' />
 <img src="https://i.imgur.com/uHipDDr.png" title='Value' alt='Val' />
 <img src="https://i.imgur.com/LoIzVEW.png" title='Selected' alt='Sel' />
