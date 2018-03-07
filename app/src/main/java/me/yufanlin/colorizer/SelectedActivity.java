@@ -123,7 +123,7 @@ public class SelectedActivity extends AppCompatActivity {
 
         //Neatly format the chosen saturation and value
         @SuppressLint("DefaultLocale") String mFormatSat = String.format("%.2f", sat * 100);
-        @SuppressLint("DefaultLocale") String mFormatVal = String.format("%.2f", val*100);
+        @SuppressLint("DefaultLocale") String mFormatVal = String.format("%.2f", val * 100);
 
         satPlaceHolder = "The chosen saturation is " + mFormatSat + "%.";
         valPlaceHolder = "The chosen value is " + mFormatVal + "%.";
