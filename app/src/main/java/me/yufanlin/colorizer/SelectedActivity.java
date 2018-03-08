@@ -47,9 +47,13 @@ public class SelectedActivity extends AppCompatActivity {
 
         mColorView.setBackground(drawable);
 
-        //Toolbar and actionbar
+        //Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +63,6 @@ public class SelectedActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private int getLeftColor(float hue, float sat, float val, int swat) {

@@ -21,11 +21,13 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     public static final String VAL_KEY = "val_key";
     public static final String SWATCH_NUMBER_KEY = "swatch_number_key";
     public static final String MY_GLOBAL_PRES = "my_global_prefs";
-    private List<ColorHSV> mColorList;
+
     private Context mContext;
+    private List<ColorHSV> mColorList;
     private int mSelector;
     private int mActivityId;
     private int mSwatchNum;
+
     private float mHue;
     private float mSat;
     private float mVal;
@@ -42,7 +44,6 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     //Called automatically by the adapter each time it needs a new visual representation of a color.
     @Override
     public ColorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View colorView = inflater.inflate(R.layout.list_color, parent, false);
 

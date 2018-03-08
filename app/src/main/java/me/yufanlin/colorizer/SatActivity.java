@@ -21,7 +21,6 @@ import me.yufanlin.colorizer.model.ColorHSV;
 
 public class SatActivity extends AppCompatActivity {
 
-    private List<ColorHSV> colorList = new ArrayList<>();
     private static final int ACTIVITY_KEY = 1002;
 
     @Override
@@ -29,30 +28,10 @@ public class SatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sat);
 
-        SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        //Set recycler adapter
+        setRecyclerAdapter();
 
-        //Retrieve color
-        float mCentralHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
-        float mSaturation = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
-        float mValue = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
-        int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
-
-        //Make color list
-        for (int i = 0; i < mSwatchNum; i++){
-            colorList.add( new ColorHSV(mCentralHue, mSaturation, mValue));
-        }
-
-        //Display toast
-        displayToast(mCentralHue, mSaturation, mValue, mSwatchNum);
-
-        //Adapter and recycler view
-        ColorAdapter adapter = new ColorAdapter(this, colorList, 1, ACTIVITY_KEY);
-
-        RecyclerView recyclerView = findViewById(R.id.rvColors);
-        recyclerView.setAdapter(adapter);
-
-        //Toolbar and actionbar
+        //Set toolbar and actionbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,7 +43,10 @@ public class SatActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     //Settings menu
@@ -78,13 +60,49 @@ public class SatActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_settings) {
             Intent settingsIntent = new Intent(this, PrefsActivity.class);
-            startActivity(settingsIntent);
+            startActivityForResult(settingsIntent, ACTIVITY_KEY);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    void displayToast(float hue, float sat, float val, int swatch) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ACTIVITY_KEY && resultCode == RESULT_OK) {
+            setRecyclerAdapter();
+        }
+    }
+
+    //Set recycler adapter
+    private void setRecyclerAdapter() {
+        SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
+
+        //Retrieve color
+        float mCentralHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
+        float mSaturation = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
+        float mValue = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
+        int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
+
+        //Make color list
+        List<ColorHSV> colorList = new ArrayList<>();
+        for (int i = 0; i < mSwatchNum; i++){
+            colorList.add( new ColorHSV(mCentralHue, mSaturation, mValue));
+        }
+
+        //Display toast
+        displayToast(mCentralHue, mSaturation, mValue, mSwatchNum);
+
+        //Set adapter and recycler view
+        ColorAdapter adapter = new ColorAdapter(this, colorList, 1, ACTIVITY_KEY);
+
+        RecyclerView recyclerView = findViewById(R.id.rvColors);
+        recyclerView.setAdapter(adapter);
+    }
+
+    //Display toast
+    private void displayToast(float hue, float sat, float val, int swatch) {
         if(hue > 360) {
             hue -= 360;
         }
