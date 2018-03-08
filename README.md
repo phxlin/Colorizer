@@ -1,6 +1,6 @@
 # Colorizer
 
-Hopin is a color generator application for Android.
+Colorizer is a color generator application for Android.
 
 ## User Stories
 
