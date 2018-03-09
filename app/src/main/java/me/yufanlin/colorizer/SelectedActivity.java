@@ -9,17 +9,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SelectedActivity extends AppCompatActivity {
 
-    TextView mHueView;
-    TextView mSatView;
-    TextView mValView;
-    TextView mColorView;
+    @BindView(R.id.hueView) TextView mHueView;
+    @BindView(R.id.satView) TextView mSatView;
+    @BindView(R.id.valView) TextView mValView;
+    @BindView(R.id.colorView) TextView mColorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected);
+
+        //Bind butter knife api
+        ButterKnife.bind(this);
 
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
 
@@ -28,11 +34,6 @@ public class SelectedActivity extends AppCompatActivity {
         float mSelectedSat = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
         float mSelectedVal = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
         int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
-
-        mHueView = findViewById(R.id.hueView);
-        mSatView = findViewById(R.id.satView);
-        mValView = findViewById(R.id.valView);
-        mColorView = findViewById(R.id.colorView);
 
         //Display color information
         displayColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
@@ -67,10 +68,10 @@ public class SelectedActivity extends AppCompatActivity {
 
     private int getLeftColor(float hue, float sat, float val, int swat) {
         float mHueCentral = (hue - ((360/swat)/2));
-        if(mHueCentral < 0){
+        while(mHueCentral < 0){
             mHueCentral += 360;
         }
-        if(mHueCentral > 360){
+        while(mHueCentral > 360){
             mHueCentral -= 360;
         }
 
@@ -81,10 +82,10 @@ public class SelectedActivity extends AppCompatActivity {
 
     private int getRightColor(float hue, float sat, float val, int swat) {
         float mHueCentral = (hue + ((360/swat)/2));
-        if(mHueCentral < 0){
+        while(mHueCentral < 0){
             mHueCentral += 360;
         }
-        if(mHueCentral > 360){
+        while(mHueCentral > 360){
             mHueCentral -= 360;
         }
 
@@ -101,16 +102,16 @@ public class SelectedActivity extends AppCompatActivity {
         String satPlaceHolder;
         String valPlaceHolder;
 
-        if(leftHue < 0){
+        while(leftHue < 0){
             leftHue += 360;
         }
-        if(leftHue > 360){
+        while(leftHue > 360){
             leftHue -= 360;
         }
-        if(rightHue < 0){
+        while(rightHue < 0){
             rightHue += 360;
         }
-        if(rightHue > 360){
+        while(rightHue > 360){
             rightHue -= 360;
         }
         if(leftHue > rightHue){
