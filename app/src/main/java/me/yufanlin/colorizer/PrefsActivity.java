@@ -92,6 +92,13 @@ public class PrefsActivity extends AppCompatActivity {
 
     //Listen central hue seek bar progress
     void CentralHueOnProgress() {
+        while(mHueProgress > 360) {
+            mHueProgress -= 360;
+        }
+
+        while(mHueProgress < 0) {
+            mHueProgress += 360;
+        }
         mCentralHueSeekBar.setProgress(mHueProgress);
         chPlaceholder = mHueProgress + "/" + mCentralHueSeekBar.getMax();
         mCentralHueProgress.setText(chPlaceholder);

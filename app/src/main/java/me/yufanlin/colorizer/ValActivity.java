@@ -49,8 +49,6 @@ public class ValActivity extends AppCompatActivity {
         }
     }
 
-
-    //Settings menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -104,11 +102,11 @@ public class ValActivity extends AppCompatActivity {
 
     //Display toast
     private void displayToast(float hue, float sat, float val, int swatch) {
-        if(hue > 360) {
+        while(hue > 360) {
             hue -= 360;
         }
 
-        if(hue < 0) {
+        while(hue < 0) {
             hue += 360;
         }
 
