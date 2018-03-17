@@ -8,9 +8,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yufanlin.colorizer.model.ColorInfo;
+import me.yufanlin.colorizer.sample.SampleDataProvider;
 
 public class SelectedActivity extends AppCompatActivity {
 
@@ -19,6 +24,8 @@ public class SelectedActivity extends AppCompatActivity {
     @BindView(R.id.valView) TextView mValView;
     @BindView(R.id.colorView) TextView mColorView;
 
+    List<ColorInfo> colorInfoList = SampleDataProvider.colorList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,11 @@ public class SelectedActivity extends AppCompatActivity {
 
         //Bind butter knife api
         ButterKnife.bind(this);
+
+        //test
+        for(ColorInfo colorInfo : colorInfoList) {
+            Toast.makeText(this, colorInfo.toString(), Toast.LENGTH_SHORT).show();
+        }
 
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
 
