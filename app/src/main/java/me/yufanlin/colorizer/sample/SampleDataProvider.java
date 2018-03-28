@@ -376,12 +376,7 @@ public class SampleDataProvider {
             Color.RGBToHSV(red, green, blue, hsv);
 
             //Make colorinfo object
-            ColorInfo colorInfo = new ColorInfo();
-            colorInfo.setName(NAMES[i]);
-            colorInfo.setHexCode(HEX_CODES[i]);
-            colorInfo.setHue(hsv[0]);
-            colorInfo.setSaturation(hsv[1]);
-            colorInfo.setValue(hsv[2]);
+            ColorInfo colorInfo = new ColorInfo(hsv[0], hsv[1], hsv[2], HEX_CODES[i], NAMES[i]);
 
             //Add color to the list and map
             addColor(colorInfo);

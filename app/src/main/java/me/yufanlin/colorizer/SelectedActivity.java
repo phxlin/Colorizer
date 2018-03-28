@@ -2,6 +2,7 @@ package me.yufanlin.colorizer;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ public class SelectedActivity extends AppCompatActivity {
     @BindView(R.id.valView) TextView mValView;
     @BindView(R.id.colorView) TextView mColorView;
 
+    List<ColorInfo> colorInfoList = SampleDataProvider.colorList;
+
     DataSource mDataSouce;
 
     @Override
@@ -38,7 +41,7 @@ public class SelectedActivity extends AppCompatActivity {
         //Open database
         mDataSouce = new DataSource(this);
         mDataSouce.open();
-        Toast.makeText(this, "Database acquired", Toast.LENGTH_SHORT).show();
+        mDataSouce.seedDatabase(colorInfoList);
 
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
 

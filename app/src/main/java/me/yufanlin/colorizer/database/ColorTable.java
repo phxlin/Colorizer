@@ -1,6 +1,7 @@
 package me.yufanlin.colorizer.database;
 
 public class ColorTable {
+
     public static final String TABLE_COLORS = "colors";
     public static final String COLUMN_ID = "colorId";
     public static final String COLUMN_NAME = "colorName";
