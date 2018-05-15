@@ -26,10 +26,6 @@ public class SelectedActivity extends AppCompatActivity {
     @BindView(R.id.valView) TextView mValView;
     @BindView(R.id.colorView) TextView mColorView;
 
-    List<ColorInfo> colorInfoList = SampleDataProvider.colorList;
-
-    DataSource mDataSouce;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +33,6 @@ public class SelectedActivity extends AppCompatActivity {
 
         //Bind butter knife api
         ButterKnife.bind(this);
-
-        //Open database
-        mDataSouce = new DataSource(this);
-        mDataSouce.open();
-        mDataSouce.seedDatabase(colorInfoList);
 
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
 
@@ -80,19 +71,6 @@ public class SelectedActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
-    }
-
-    //Prevent database leak
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mDataSouce.close();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mDataSouce.open();
     }
 
     private int getLeftColor(float hue, float sat, float val, int swat) {

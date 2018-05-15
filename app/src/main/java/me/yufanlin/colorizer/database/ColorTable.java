@@ -10,6 +10,8 @@ public class ColorTable {
     public static final String COLUMN_SATURATION = "saturation";
     public static final String COLUMN_VALUE = "value";
 
+    public static final String[] COLUMN_ALL = {COLUMN_ID, COLUMN_NAME, COLUMN_HEX_CODE, COLUMN_HUE, COLUMN_SATURATION, COLUMN_VALUE};
+
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_COLORS + "(" +
                     COLUMN_ID + " TEXT PRIMARY KEY," +

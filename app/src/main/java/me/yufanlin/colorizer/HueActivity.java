@@ -18,7 +18,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.yufanlin.colorizer.database.DataSource;
 import me.yufanlin.colorizer.model.ColorHSV;
+import me.yufanlin.colorizer.model.ColorInfo;
+import me.yufanlin.colorizer.sample.SampleDataProvider;
 
 public class HueActivity extends AppCompatActivity {
 

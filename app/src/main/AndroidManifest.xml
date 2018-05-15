@@ -12,8 +12,8 @@
         <activity
             android:name=".HueActivity"
             android:label="@string/title_activity_hue"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="standard">
+            android:launchMode="standard"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +23,9 @@
         <activity
             android:name=".SatActivity"
             android:label="@string/title_activity_sat"
+            android:launchMode="standard"
             android:parentActivityName=".HueActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="standard">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HueActivity" />
@@ -33,12 +33,21 @@
         <activity
             android:name=".ValActivity"
             android:label="@string/title_activity_val"
+            android:launchMode="standard"
             android:parentActivityName=".SatActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="standard">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SatActivity" />
+        </activity>
+        <activity
+            android:name=".ListActivity"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".ValActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ValActivity" />
         </activity>
         <activity
             android:name=".SelectedActivity"
@@ -57,6 +66,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HueActivity" />
         </activity>
+
     </application>
 
 </manifest>
