@@ -19,6 +19,6 @@
     <string name="central_hue_progress">Progress</string>
     <string name="swatch_number_progress">Progress</string>
     <string name="selected_color">Color</string>
-    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_list">Color List</string>
 
 </resources>

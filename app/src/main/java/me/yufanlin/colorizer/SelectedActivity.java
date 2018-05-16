@@ -1,23 +1,19 @@
 package me.yufanlin.colorizer;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yufanlin.colorizer.database.DataSource;
-import me.yufanlin.colorizer.model.ColorInfo;
-import me.yufanlin.colorizer.sample.SampleDataProvider;
 
 public class SelectedActivity extends AppCompatActivity {
 
@@ -59,18 +55,19 @@ public class SelectedActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ListActivity.class);
+                startActivity(intent);
+            }
+        });
+
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     private int getLeftColor(float hue, float sat, float val, int swat) {
@@ -122,8 +119,8 @@ public class SelectedActivity extends AppCompatActivity {
             rightHue -= 360;
         }
         if(leftHue > rightHue){
-            huePlaceHolder = "The chosen hues range from " + (int) leftHue + "\u00B0 to " + (int) rightHue +
-                    "\u00B0 (" + (int) (rightHue + 360) + "\u00B0)";
+            huePlaceHolder = "The chosen hues range from " + (int) rightHue + "\u00B0 to " + (int) leftHue
+                    + "\u00B0";
             mHueView.setText(huePlaceHolder);
         }
         else{
@@ -132,12 +129,19 @@ public class SelectedActivity extends AppCompatActivity {
             mHueView.setText(huePlaceHolder);
         }
 
-        //Neatly format the chosen saturation and value
-        @SuppressLint("DefaultLocale") String mFormatSat = String.format("%.2f", sat * 100);
-        @SuppressLint("DefaultLocale") String mFormatVal = String.format("%.2f", val * 100);
+        float upperSat = (float)(sat + 1.0/(numb-1));
+        float lowerSat = (float)(sat - 1.0/(numb-1));
+        float upperVal = (float)(val + 1.0/(numb-1));
+        float lowerVal = (float)(val - 1.0/(numb-1));
 
-        satPlaceHolder = "The chosen saturation is " + mFormatSat + "%.";
-        valPlaceHolder = "The chosen value is " + mFormatVal + "%.";
+        //Neatly format the chosen saturation and value
+        @SuppressLint("DefaultLocale") String mFormatUpperSat = String.format("%.2f", upperSat * 100);
+        @SuppressLint("DefaultLocale") String mFormatLowerSat = String.format("%.2f", lowerSat * 100);
+        @SuppressLint("DefaultLocale") String mFormatUpperVal = String.format("%.2f", upperVal * 100);
+        @SuppressLint("DefaultLocale") String mFormatLowerVal = String.format("%.2f", lowerVal * 100);
+
+        satPlaceHolder = "The chosen saturation range from " + mFormatLowerSat + "% to " + mFormatUpperSat + "%.";
+        valPlaceHolder = "The chosen value range from " + mFormatLowerVal + "% to " + mFormatUpperVal + "%.";
 
         mSatView.setText(satPlaceHolder);
         mValView.setText(valPlaceHolder);

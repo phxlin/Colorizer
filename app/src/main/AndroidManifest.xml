@@ -41,15 +41,6 @@
                 android:value=".SatActivity" />
         </activity>
         <activity
-            android:name=".ListActivity"
-            android:label="@string/title_activity_list"
-            android:parentActivityName=".ValActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ValActivity" />
-        </activity>
-        <activity
             android:name=".SelectedActivity"
             android:label="@string/title_activity_selected"
             android:parentActivityName=".ValActivity"
@@ -57,6 +48,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ValActivity" />
+        </activity>
+        <activity
+            android:name=".ListActivity"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".SelectedActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SelectedActivity" />
         </activity>
         <activity
             android:name=".PrefsActivity"

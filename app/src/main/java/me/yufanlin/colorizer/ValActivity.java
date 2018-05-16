@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +38,7 @@ public class ValActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ListActivity.class);
+                Intent intent = new Intent(view.getContext(), SelectedActivity.class);
                 startActivity(intent);
             }
         });
@@ -117,7 +116,7 @@ public class ValActivity extends AppCompatActivity {
         Toast.makeText(this, "Hue: " + hue + "\u00B0"
                 + ", Sat: " + mFormatSat + "%"
                 + ", Val: " + mFormatVal + "%"
-                + ", Swat: " + swatch, Toast.LENGTH_LONG).show();
+                + ", Swat: " + swatch, Toast.LENGTH_SHORT).show();
     }
 
 }

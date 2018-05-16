@@ -1,7 +1,6 @@
 package me.yufanlin.colorizer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.List;
-import me.yufanlin.colorizer.model.ColorHSV;
 import me.yufanlin.colorizer.model.ColorInfo;
 
 public class ColorInfoAdapter extends RecyclerView.Adapter<ColorInfoAdapter.ViewHolder> {
@@ -36,7 +35,6 @@ public class ColorInfoAdapter extends RecyclerView.Adapter<ColorInfoAdapter.View
     //Called each time the adapter encounters a new color that needs to be displayed.
     @Override
     public void onBindViewHolder(ColorInfoAdapter.ViewHolder holder, int position) {
-
         //Display color
         ColorInfo mColor = mColorInfoList.get(position);
         String mColorName = mColor.getName();

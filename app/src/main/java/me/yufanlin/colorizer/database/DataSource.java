@@ -7,7 +7,6 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,19 +27,19 @@ public class DataSource {
 
     public void open() {
         mDatabase = mDbHelper.getWritableDatabase();
-        Toast.makeText(mContext, "Database acquired", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "Database acquired", Toast.LENGTH_SHORT).show();
     }
 
     public void close() {
         mDbHelper.close();
-        Toast.makeText(mContext, "Database closed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "Database closed", Toast.LENGTH_SHORT).show();
     }
 
     public void seedDatabase(List<ColorInfo> colorInfoList) {
         long numColors = getColorInfoCount();
         if(numColors == 0) {
             //Insert data
-            for(ColorInfo color :
+            for (ColorInfo color :
                     colorInfoList) {
                 try {
                     createColor(color);
@@ -48,10 +47,11 @@ public class DataSource {
                     e.printStackTrace();
                 }
             }
-            Toast.makeText(mContext, "Data inserted.", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(mContext, "Data are already in the database", Toast.LENGTH_SHORT).show();
         }
+            //Toast.makeText(mContext, "Data inserted.", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(mContext, "Data are already in the database", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void createColor(ColorInfo color) {
@@ -64,14 +64,24 @@ public class DataSource {
     }
 
     //Retrieve data
-    public List<ColorInfo> getAllColors() {
+    public List<ColorInfo> getAllColors(float leftHue, float rightHue, float upperSat, float lowerSat, float upperVal, float lowerVal) {
         List<ColorInfo> colorInfos = new ArrayList<>();
 
+        String[] hsvArray = {Float.toString(leftHue), Float.toString(rightHue),
+                                Float.toString(lowerSat), Float.toString(upperSat),
+                                    Float.toString(lowerVal), Float.toString(upperVal)};
+
         Cursor cursor = mDatabase.query(ColorTable.TABLE_COLORS, ColorTable.COLUMN_ALL,
-                null, null, null, null, ColorTable.COLUMN_NAME);
+                ColorTable.COLUMN_HUE + ">=? AND "
+                        + ColorTable.COLUMN_HUE + "<=? AND "
+                        + ColorTable.COLUMN_SATURATION + ">=? AND "
+                        + ColorTable.COLUMN_SATURATION + "<=? AND "
+                        + ColorTable.COLUMN_VALUE + ">=? AND "
+                        + ColorTable.COLUMN_VALUE + "<=?", hsvArray, null, null, ColorTable.COLUMN_NAME);
 
         while(cursor.moveToNext()) {
             ColorInfo colorInfo = new ColorInfo();
+
             colorInfo.setColorId(cursor.getString(
                     cursor.getColumnIndex(ColorTable.COLUMN_ID)));
             colorInfo.setName(cursor.getString(
