@@ -13,5 +13,4 @@ The following functionalities are completed:
 <img src="https://i.imgur.com/r2ntJ28.png" width="500" title='Hue' alt='Hue' />
 <img src="https://i.imgur.com/d309W0L.png" width="500" title='Saturation'alt='Sat' />
 <img src="https://i.imgur.com/uHipDDr.png" width="500" title='Value' alt='Val' />
-<img src="https://i.imgur.com/H5Lz55R.png" width="500" title='Selected' alt='Sel' />
 <img src="https://i.imgur.com/J4iXaYE.png" width="500" title='Preference' alt='Prefs' />
