@@ -69,7 +69,7 @@ public class ListActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
         List<ColorInfo> listFromDB;
 
-        //Retrieve hue and swatch number
+        //Retrieve hsv and swatch number from preference
         float mSelectedHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
         float mSelectedSat = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
         float mSelectedVal = prefs.getFloat(ColorAdapter.VAL_KEY, 1);

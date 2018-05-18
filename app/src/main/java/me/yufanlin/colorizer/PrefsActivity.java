@@ -29,10 +29,10 @@ public class PrefsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prefs);
 
-        //Bind butter knife api
+        //Bind butter knife
         ButterKnife.bind(this);
 
-        //Set central hue and swatch number progress
+        //Retrieve and set central hue and swatch number progress from preference
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
         mHueProgress = Math.round(prefs.getFloat(ColorAdapter.HUE_KEY, 0));
         mSwatchProgress = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
@@ -53,32 +53,9 @@ public class PrefsActivity extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        //Load fragment
-//        getFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.prefs_content, new SettingsFragment())
-//                .commit();
     }
 
-      //Settings fragment
-//    public static class SettingsFragment extends PreferenceFragment {
-//        @Override
-//        public void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            addPreferencesFromResource(R.xml.settings);
-//        }
-//    }
-
-    @Override
-    public void onBackPressed() {
-        //Send back intent with result
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
-
-        finish();
-    }
-
+    //Up navigation button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -89,8 +66,19 @@ public class PrefsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        //Send back intent with result
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+
+        finish();
+    }
+
     //Listen central hue seek bar progress
     void CentralHueOnProgress() {
+
+        //Ensure hue's value is between 0 and 360
         while(mHueProgress > 360) {
             mHueProgress -= 360;
         }

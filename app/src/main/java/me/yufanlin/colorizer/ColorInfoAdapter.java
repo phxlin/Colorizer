@@ -1,6 +1,7 @@
 package me.yufanlin.colorizer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,8 @@ import java.util.List;
 import me.yufanlin.colorizer.model.ColorInfo;
 
 public class ColorInfoAdapter extends RecyclerView.Adapter<ColorInfoAdapter.ViewHolder> {
+
+    public static final String COLOR_KEY = "color_key";
 
     private Context mContext;
     private List<ColorInfo> mColorInfoList;
@@ -35,8 +38,8 @@ public class ColorInfoAdapter extends RecyclerView.Adapter<ColorInfoAdapter.View
     //Called each time the adapter encounters a new color that needs to be displayed.
     @Override
     public void onBindViewHolder(ColorInfoAdapter.ViewHolder holder, int position) {
-        //Display color
-        ColorInfo mColor = mColorInfoList.get(position);
+        //Display color in db
+        final ColorInfo mColor = mColorInfoList.get(position);
         String mColorName = mColor.getName();
         float mHue = mColor.getHue();
         float mSat = mColor.getSaturation();
@@ -45,12 +48,18 @@ public class ColorInfoAdapter extends RecyclerView.Adapter<ColorInfoAdapter.View
         float[] hsv = {mHue, mSat, mVal};
         int mColorHSV = Color.HSVToColor(hsv);
 
-        GradientDrawable drawable
-                = new GradientDrawable( GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[] {mColorHSV, mColorHSV} );
-
-        holder.mColorText.setBackground(drawable);
+        holder.mColorText.setBackgroundColor(mColorHSV);
         holder.mColorNameText.setText(mColorName);
+
+        //Navigate to detail activity
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra(COLOR_KEY, mColor);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     //Return number of colors in the color collection.

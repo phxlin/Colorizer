@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Colorizer</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_hue">Colorizer</string>
+    <string name="title_activity_hue">Hue</string>
     <string name="title_activity_sat">Saturation</string>
     <string name="title_activity_val">Value</string>
     <string name="title_activity_selected">Selected Color</string>
+    <string name="title_activity_list">Color List</string>
+    <string name="title_activity_detail">Color Detail</string>
+    <string name="title_activity_prefs">Settings</string>
+
     <string name="Start">Start</string>
     <string name="color">color</string>
 
@@ -19,6 +23,8 @@
     <string name="central_hue_progress">Progress</string>
     <string name="swatch_number_progress">Progress</string>
     <string name="selected_color">Color</string>
-    <string name="title_activity_list">Color List</string>
-
+    <string name="hex_code_view">TextView</string>
+    <string name="color_view">TextView</string>
+    <string name="color_name_view">TextView</string>
+    <string name="hsv_view">TextView</string>
 </resources>

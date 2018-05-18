@@ -1,6 +1,7 @@
 package me.yufanlin.colorizer.model;
 
 import android.content.ContentValues;
+import android.os.Parcel;
 
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ public class ColorInfo extends ColorHSV {
     private String name;
     private String hexCode;
 
-    //Constructor
+    //Constructors
     public ColorInfo() {
     }
 
@@ -62,4 +63,37 @@ public class ColorInfo extends ColorHSV {
                 ", value='" + getValue() +
                 '}';
     }
+
+    //Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.colorId);
+        dest.writeString(this.name);
+        dest.writeString(this.hexCode);
+    }
+
+    protected ColorInfo(Parcel in) {
+        super(in);
+        this.colorId = in.readString();
+        this.name = in.readString();
+        this.hexCode = in.readString();
+    }
+
+    public static final Creator<ColorInfo> CREATOR = new Creator<ColorInfo>() {
+        @Override
+        public ColorInfo createFromParcel(Parcel source) {
+            return new ColorInfo(source);
+        }
+
+        @Override
+        public ColorInfo[] newArray(int size) {
+            return new ColorInfo[size];
+        }
+    };
 }

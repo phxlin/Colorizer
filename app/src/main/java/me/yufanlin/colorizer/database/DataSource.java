@@ -38,7 +38,6 @@ public class DataSource {
     public void seedDatabase(List<ColorInfo> colorInfoList) {
         long numColors = getColorInfoCount();
         if(numColors == 0) {
-            //Insert data
             for (ColorInfo color :
                     colorInfoList) {
                 try {
@@ -54,16 +53,18 @@ public class DataSource {
 //        }
     }
 
+    //Create contentValues and insert them to db
     private void createColor(ColorInfo color) {
         ContentValues values = color.toValues();
         mDatabase.insert(ColorTable.TABLE_COLORS, null, values);
     }
 
+    //Return colorinfo count
     private long getColorInfoCount() {
         return DatabaseUtils.queryNumEntries(mDatabase, ColorTable.TABLE_COLORS);
     }
 
-    //Retrieve data
+    //Retrieve and filter colorinfo objects
     public List<ColorInfo> getAllColors(float leftHue, float rightHue, float upperSat, float lowerSat, float upperVal, float lowerVal) {
         List<ColorInfo> colorInfos = new ArrayList<>();
 
@@ -77,7 +78,7 @@ public class DataSource {
                         + ColorTable.COLUMN_SATURATION + ">=? AND "
                         + ColorTable.COLUMN_SATURATION + "<=? AND "
                         + ColorTable.COLUMN_VALUE + ">=? AND "
-                        + ColorTable.COLUMN_VALUE + "<=?", hsvArray, null, null, ColorTable.COLUMN_NAME);
+                        + ColorTable.COLUMN_VALUE + "<=?", hsvArray, null, null, ColorTable.COLUMN_HUE);
 
         while(cursor.moveToNext()) {
             ColorInfo colorInfo = new ColorInfo();

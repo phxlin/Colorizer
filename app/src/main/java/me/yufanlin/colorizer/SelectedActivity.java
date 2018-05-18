@@ -27,21 +27,21 @@ public class SelectedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected);
 
-        //Bind butter knife api
+        //Bind butter knife
         ButterKnife.bind(this);
 
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
 
-        //Retrieve color
+        //Retrieve hsv and swatch number from preference
         float mSelectedHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
         float mSelectedSat = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
         float mSelectedVal = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
         int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
 
-        //Display color information
+        //Display selected hsv
         displayColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
 
-        //Display color
+        //Display color from left to right using central hue
         int mLeftColor = getLeftColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
         int mRightColor = getRightColor(mSelectedHue, mSelectedSat, mSelectedVal, mSwatchNum);
 
@@ -98,7 +98,7 @@ public class SelectedActivity extends AppCompatActivity {
         return Color.HSVToColor(hsv);
     }
 
-    //Display color information
+    //Display selected hsv ranges
     private void displayColor(float hue, float sat, float val, int numb) {
         float leftHue = (hue - ((360/numb)/2));
         float rightHue = (hue + ((360/numb)/2));
@@ -140,8 +140,8 @@ public class SelectedActivity extends AppCompatActivity {
         @SuppressLint("DefaultLocale") String mFormatUpperVal = String.format("%.2f", upperVal * 100);
         @SuppressLint("DefaultLocale") String mFormatLowerVal = String.format("%.2f", lowerVal * 100);
 
-        satPlaceHolder = "The chosen saturation range from " + mFormatLowerSat + "% to " + mFormatUpperSat + "%.";
-        valPlaceHolder = "The chosen value range from " + mFormatLowerVal + "% to " + mFormatUpperVal + "%.";
+        satPlaceHolder = "The chosen saturation range from " + mFormatLowerSat + "% to " + mFormatUpperSat + "%";
+        valPlaceHolder = "The chosen value range from " + mFormatLowerVal + "% to " + mFormatUpperVal + "%";
 
         mSatView.setText(satPlaceHolder);
         mValView.setText(valPlaceHolder);

@@ -72,16 +72,4 @@ public class ColorHSV implements Parcelable {
         this.saturation = in.readFloat();
         this.value = in.readFloat();
     }
-
-    public static final Parcelable.Creator<ColorHSV> CREATOR = new Parcelable.Creator<ColorHSV>() {
-        @Override
-        public ColorHSV createFromParcel(Parcel source) {
-            return new ColorHSV(source);
-        }
-
-        @Override
-        public ColorHSV[] newArray(int size) {
-            return new ColorHSV[size];
-        }
-    };
 }

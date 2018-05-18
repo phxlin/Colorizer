@@ -24,21 +24,6 @@ public class HueActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        final SharedPreferences.Editor editor = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE).edit();
-//        //Listen any changes made in settings
-//        SharedPreferences.OnSharedPreferenceChangeListener prefsListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-//            @Override
-//            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-//                if(s.equals(getString(R.string.central_hue_edit_text_preference))) {
-//                    editor.putFloat(ColorAdapter.HUE_KEY, Float.parseFloat(settings.getString(s, "0")));
-//                    editor.apply();
-//                    Log.i("HERE", "onSharedPreferenceChanged: " + Float.parseFloat(settings.getString(s, "0")));
-//                }
-//            }
-//        };
-//        settings.registerOnSharedPreferenceChangeListener(prefsListener);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hue);
 
@@ -65,6 +50,7 @@ public class HueActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //Settings
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_settings) {
@@ -75,6 +61,7 @@ public class HueActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Back button in preference activity updates hue activity recycler view
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -88,19 +75,19 @@ public class HueActivity extends AppCompatActivity {
     private void setRecyclerAdapter() {
         SharedPreferences prefs = getSharedPreferences(ColorAdapter.MY_GLOBAL_PRES, MODE_PRIVATE);
 
-        //Retrieve color
+        //Retrieve hsv and swatch number from preference
         float mCentralHue = prefs.getFloat(ColorAdapter.HUE_KEY, 0);
         float mSaturation = prefs.getFloat(ColorAdapter.SAT_KEY, 1);
         float mValue = prefs.getFloat(ColorAdapter.VAL_KEY, 1);
         int mSwatchNum = prefs.getInt(ColorAdapter.SWATCH_NUMBER_KEY, 13);
 
-        //Make color list
+        //Create colorlist array
         List<ColorHSV> colorList = new ArrayList<>();
         for (int i = 0; i < mSwatchNum; i++){
             colorList.add( new ColorHSV(mCentralHue, mSaturation, mValue));
         }
 
-        //Make toast
+        //Display selected hsv
         displayToast(mCentralHue, mSaturation, mValue, mSwatchNum);
 
         //Set adapter and recycler view
@@ -112,6 +99,8 @@ public class HueActivity extends AppCompatActivity {
 
     //Display toast
     private void displayToast(float hue, float sat, float val, int swatch) {
+
+        //Ensure hue's value is between 0 and 360
         while(hue > 360) {
             hue -= 360;
         }
@@ -120,7 +109,7 @@ public class HueActivity extends AppCompatActivity {
             hue += 360;
         }
 
-        //neatly format the chosen saturation and value
+        //Neatly format the chosen saturation and value
         @SuppressLint("DefaultLocale") String mFormatSat = String.format("%.2f", sat * 100);
         @SuppressLint("DefaultLocale") String mFormatVal = String.format("%.2f", val * 100);
 

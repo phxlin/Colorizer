@@ -10,6 +10,7 @@ import java.util.Map;
 import me.yufanlin.colorizer.model.ColorInfo;
 
 public class SampleDataProvider {
+    //List and map
     public static List<ColorInfo> colorList;
     public static Map<String, ColorInfo> colorMap;
 
@@ -290,7 +291,7 @@ public class SampleDataProvider {
             "Napier green ","Naples yellow ","Navajo white ","Navy ","Navy purple ","Neon Carrot ","Neon fuchsia ",
             "Neon green ","New Car ","New York pink ","Non-photo blue ","North Texas Green ","Nyanza ","Ocean Boat Blue ",
             "Ochre ","Office green ","Old burgundy ","Old gold ","Old heliotrope ","Old lace ","Old lavender ",
-            "Old mauve ","Old moss green ","Old rose ","Old silver ","Olive ","Olive Drab (","Olive Drab ",
+            "Old mauve ","Old moss green ","Old rose ","Old silver ","Olive ","Olive Drab I","Olive Drab II",
             "Olivine ","Onyx ","Opera mauve ","Orange (color wheel) ","Orange (Crayola) ","Orange (Pantone) ","Orange (RYB) ",
             "Orange (web) ","Orange peel ","Orange-red ","Orange-yellow ","Orchid ","Orchid pink ","Orioles orange ",
             "Otter brown ","Outer Space ","Outrageous Orange ","Oxford Blue ","OU Crimson Red ","Pacific Blue ","Pakistan green ",
@@ -376,7 +377,7 @@ public class SampleDataProvider {
             float[] hsv = {0, 0, 0};
             Color.RGBToHSV(red, green, blue, hsv);
 
-            //Make colorinfo object
+            //Create colorinfo object
             ColorInfo colorInfo = new ColorInfo(hsv[0], hsv[1], hsv[2], HEX_CODES[i], NAMES[i]);
 
             //Add color to the list and map

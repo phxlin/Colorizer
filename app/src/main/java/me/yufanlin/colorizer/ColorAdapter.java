@@ -52,7 +52,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     public void onBindViewHolder(ColorAdapter.ViewHolder holder, int position) {
         position = holder.getAdapterPosition();
 
-        //Display color
+        //Display color from left to right using central hue
         ColorHSV mColor = mColorList.get(position);
         final float mHue = mColor.getHue();
         final float mSat = mColor.getSaturation();
@@ -72,7 +72,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         final float mSelectedSat = (float)(1.0 - (position*(1.0/(mSwatchNum-1))));
         final float mSelectedVal = (float)(1.0 - (position*(1.0/(mSwatchNum-1))));
 
-        //Navigate and launch activity
+        //Navigate and launch activity while storing selected hsv and swatch number
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,14 +129,14 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         }
     }
 
-    //Put float
+    //Put float in preference
     private void setFloat(String id, float selected) {
         SharedPreferences.Editor editor = getSharedPrefs(mContext).edit();
         editor.putFloat(id, selected);
         editor.apply();
     }
 
-    //Put int
+    //Put int in preference
     private void setInt(String id, int selected) {
         SharedPreferences.Editor editor = getSharedPrefs(mContext).edit();
         editor.putInt(id, selected);
@@ -147,7 +147,6 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         return context.getSharedPreferences(MY_GLOBAL_PRES, Context.MODE_PRIVATE);
     }
 
-    //Get color
     private int getLeftColor(float hue, int swatchCount, int position, float saturation, float value, int selector){
         int mColorHSV;
         if(selector == 0){

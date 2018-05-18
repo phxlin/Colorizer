@@ -60,13 +60,20 @@
         </activity>
         <activity
             android:name=".PrefsActivity"
-            android:label="Settings"
+            android:label="@string/title_activity_prefs"
             android:parentActivityName=".HueActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HueActivity" />
         </activity>
-
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName=".ListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListActivity" />
+        </activity>
     </application>
 
 </manifest>
