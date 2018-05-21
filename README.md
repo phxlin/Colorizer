@@ -8,6 +8,7 @@ The following functionalities are completed:
 * [X] User can select hue, saturation, and value.
 * [X] Show ranges of selected HSV.
 * [X] Return a list of colors stored in the device that are withnin the ranges of selected HSV.
+* [X] Show details of selected color (Name, hexcode, and HSV).
 * [X] Save preference (Central hue and swatch number).
 
 ## Picture Demo 
